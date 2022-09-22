@@ -1,0 +1,66 @@
+#include<iostream>
+
+using namespace std;
+
+#define MAXSIZE 101
+
+typedef struct stack {
+    int data[MAXSIZE];
+    int top;
+}Stack;
+
+int main()
+{
+    Stack s;
+    s.top = -1;
+    char ch[101];
+    int i;
+    cin >> ch;
+    for( i = 0 ; ch[i] != '\0' ; i++ )
+    {
+        int d;
+        if (ch[i] == '-')
+        {
+            d = (s.data[s.top - 1]) - (s.data[s.top]);
+            s.data[--s.top] = d;
+        }
+        else if (ch[i] == '+')
+        {
+            d = (s.data[s.top - 1]) + (s.data[s.top]);
+            //cout << d << endl;
+            s.data[--s.top] = d;
+        }
+        else if (ch[i] == '*')
+        {
+            d = (s.data[s.top - 1]) * (s.data[s.top]);
+           // cout << d << endl;
+            s.data[--s.top] = d;
+        }
+        else if (ch[i] == '%')
+        {
+            d = (s.data[s.top - 1]) % (s.data[s.top]);
+            //cout << d << endl;
+            s.data[--s.top] = d;
+        }
+        else if (ch[i] == '/')
+        {
+            d = (s.data[s.top - 1]) / (s.data[s.top]);
+            //cout << d << endl;
+            s.top--;
+            s.data[s.top] = d;
+        }
+        else
+        {
+            s.top++;
+            s.data[s.top] = ch[i] - '0';
+        }
+    }
+
+    //char a = '1';  字符转换为数字
+    //int  b = a  - '0';
+    if(s.top==0)
+    cout << s.data[s.top];
+
+    return 0;
+
+}
